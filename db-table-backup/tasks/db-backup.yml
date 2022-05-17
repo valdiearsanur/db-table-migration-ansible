@@ -1,0 +1,32 @@
+---
+
+- block:
+
+  - name: PostgreSQL ping dbsrv server using not default credentials and ssl
+    community.general.postgresql_ping:
+      db: "{{ database_backup_name }}"
+    register: db_ping
+
+  - name: Terminate source database
+    postgresql_query:
+      query: SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname=%s
+      positional_args:
+        - "{{ database_backup_name }}"
+
+  - name: Backup from source database
+    postgresql_query:
+      db: "{{ database_backup_name }}"
+      query: COPY ({{ database_backup_sql }}) TO %s delimiter '~' CSV HEADER
+      positional_args:
+        - /tmp/db-table-backup--backup-csv
+
+  - name: Fetch backed up data
+    ansible.builtin.fetch:
+      src: /tmp/db-table-backup--backup-csv
+      dest: files/backup-csv
+      flat: yes
+
+  - name: Remove backed up data
+    ansible.builtin.file:
+      path: /tmp/db-table-backup--backup-csv
+      state: absent

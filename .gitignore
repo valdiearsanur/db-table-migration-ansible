@@ -1,0 +1,6 @@
+envs
+files/*
+!files/.gitkeep
+local*.ini
+staging*.ini
+production*.ini

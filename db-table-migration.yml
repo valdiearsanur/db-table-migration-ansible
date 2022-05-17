@@ -1,0 +1,9 @@
+---
+
+- hosts: backup
+  roles:
+  - db-table-backup
+
+- hosts: restore
+  roles:
+  - db-table-restore
