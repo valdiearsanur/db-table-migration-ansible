@@ -1,5 +1,5 @@
 ---
 
 database_restore_name: 
-database_restore_script: 
+database_restore_table_name: 
 database_restore_table_column_order: 

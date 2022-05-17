@@ -25,7 +25,6 @@
       query: COPY {{ database_restore_table_name }}({{ database_restore_table_column_order }}) FROM %s DELIMITER '~' CSV HEADER
       positional_args:
         - /tmp/db-table-restore--backup-csv
-      ignore_errors: yes
 
   - name: Remove backed up data
     ansible.builtin.file:
