@@ -2,8 +2,10 @@
 This is ansible Roles for moving table data (by custom SQL) between two different databases.
 
 # Table of Contents  
-[Headers](#headers)  
-[Emphasis](#emphasis)  
+1. [Prerequisites](#1-prerequisites)  
+2. [Test Drive Ansible Roles](#2-test-drive-ansible-roles)
+3. [Execute Ansible Roles](#3-execute-ansible-roles)
+4. [Variable Definition](##4-variable-definition)
 
 ## 1. Prerequisites
 You only need Ansible installed (above python) to use this : `pip install ansible`. But if you want to perform isolated test, you can follow steps below : 
