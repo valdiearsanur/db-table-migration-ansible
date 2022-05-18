@@ -1,10 +1,15 @@
 # Ansible Roles for database migration
 This is ansible Roles for moving table data (by custom SQL) between two different databases.
 
+# Table of Contents  
+[Headers](#headers)  
+[Emphasis](#emphasis)  
+
 ## 1. Prerequisites
+You only need Ansible installed (above python) to use this : `pip install ansible`. But if you want to perform isolated test, you can follow steps below : 
+
 1. Docker engine
-It usable for test drive our ansible roles.
-1. Docker SDK for python (OPTIONAL, unless you want to perform isolated test for your ansible scripts)
+1. Docker SDK for python
     ```
     pip install docker
     ```
@@ -12,7 +17,7 @@ It usable for test drive our ansible roles.
     ```
     pip install ansible
     ```
-1. Ansible Molecule (OPTIONAL, unless you want to perform isolated test for your ansible scripts)
+1. Ansible Molecule
     ```
     pip install molecule
     ```
