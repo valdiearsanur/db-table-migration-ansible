@@ -4,7 +4,7 @@ This is ansible Roles for moving table data (by custom SQL) between two differen
 ## 1. Prerequisites
 1. Docker engine
 It usable for test drive our ansible roles.
-1. Docker SDK for python
+1. Docker SDK for python (OPTIONAL, unless you want to perform isolated test for your ansible scripts)
     ```
     pip install docker
     ```
@@ -12,7 +12,7 @@ It usable for test drive our ansible roles.
     ```
     pip install ansible
     ```
-1. Ansible Molecule
+1. Ansible Molecule (OPTIONAL, unless you want to perform isolated test for your ansible scripts)
     ```
     pip install molecule
     ```
