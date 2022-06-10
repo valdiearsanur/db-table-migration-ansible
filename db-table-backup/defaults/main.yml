@@ -1,4 +1,7 @@
 ---
 
+database_login_host:
+database_login_user:
+database_login_password:
 database_backup_name: 
 database_backup_sql: 

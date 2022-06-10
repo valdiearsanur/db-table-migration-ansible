@@ -1,5 +1,8 @@
 ---
 
+database_login_host:
+database_login_user:
+database_login_password:
 database_restore_name: 
 database_restore_table_name: 
 database_restore_table_column_order: 
