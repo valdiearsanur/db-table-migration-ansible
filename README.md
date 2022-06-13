@@ -11,17 +11,9 @@ This is ansible Roles for moving table data (by custom SQL) between two differen
 You only need Ansible installed (above python) to use this : `pip install ansible`. But if you want to perform isolated test, you can follow steps below : 
 
 1. Docker engine
-1. Docker SDK for python
+1. Python dependencies: Docker SDK for python, Ansible, Ansible Molecule
     ```
-    pip install docker
-    ```
-1. Ansible
-    ```
-    pip install ansible
-    ```
-1. Ansible Molecule
-    ```
-    pip install molecule
+    pip install -r requirements.txt
     ```
 
 ## 2. Test Drive Ansible Roles
