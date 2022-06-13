@@ -4,26 +4,26 @@
 
   - name: PostgreSQL ping dbsrv server using not default credentials and ssl
     community.general.postgresql_ping:
-      login_host: "{{ database_login_host }}"
-      login_user: "{{ database_login_user }}"
-      login_password: "{{ database_login_password }}"
+      login_host: "{{ database_backup_login_host }}"
+      login_user: "{{ database_backup_login_user }}"
+      login_password: "{{ database_backup_login_password }}"
       db: "{{ database_backup_name }}"
     register: db_ping
 
   - name: Terminate source database
     postgresql_query:
-      login_host: "{{ database_login_host }}"
-      login_user: "{{ database_login_user }}"
-      login_password: "{{ database_login_password }}"
+      login_host: "{{ database_backup_login_host }}"
+      login_user: "{{ database_backup_login_user }}"
+      login_password: "{{ database_backup_login_password }}"
       query: SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname=%s
       positional_args:
         - "{{ database_backup_name }}"
 
   - name: Backup from source database
     postgresql_query:
-      login_host: "{{ database_login_host }}"
-      login_user: "{{ database_login_user }}"
-      login_password: "{{ database_login_password }}"
+      login_host: "{{ database_backup_login_host }}"
+      login_user: "{{ database_backup_login_user }}"
+      login_password: "{{ database_backup_login_password }}"
       db: "{{ database_backup_name }}"
       query: COPY ({{ database_backup_sql }}) TO %s delimiter '~' CSV HEADER
       positional_args:
