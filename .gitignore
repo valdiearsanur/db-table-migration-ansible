@@ -5,3 +5,6 @@ files/*
 local*.ini
 staging*.ini
 production*.ini
+local*.yaml
+staging*.yaml
+production*.yaml

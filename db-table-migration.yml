@@ -1,9 +1,17 @@
 ---
 
-- hosts: backup
-  roles:
-  - db-table-backup
+- hosts: exec_sql
+  tasks:
+    - include_role:
+        name: db-table-backup
+        tasks_from: db-backup
 
-- hosts: restore
+- hosts: backup
+  tasks:
+    - include_role:
+        name: db-table-backup
+        tasks_from: fetch-backup-file
+
+- hosts: exec_sql
   roles:
   - db-table-restore

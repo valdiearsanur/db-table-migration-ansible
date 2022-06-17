@@ -1,0 +1,11 @@
+---
+
+- block:
+
+  - name: Fetch backed up data
+    ansible.builtin.fetch:
+      src: /tmp/db-table-backup--{{ item.key }}
+      dest: /tmp/db-table-restore--{{ item.key }}
+      force: yes
+      flat: yes
+    with_dict: "{{ database_migration_map }}"

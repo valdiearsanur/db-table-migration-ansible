@@ -1,3 +1,4 @@
 ansible==3.4.0
 molecule==3.0.3
 docker==4.2.0
+psycopg2-binary==2.8.6

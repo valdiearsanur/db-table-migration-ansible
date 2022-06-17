@@ -10,33 +10,26 @@
       db: "{{ database_backup_name }}"
     register: db_ping
 
-  - name: Terminate source database
-    postgresql_query:
-      login_host: "{{ database_backup_login_host }}"
-      login_user: "{{ database_backup_login_user }}"
-      login_password: "{{ database_backup_login_password }}"
-      query: SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname=%s
-      positional_args:
-        - "{{ database_backup_name }}"
+  # - name: Terminate source database
+  #   postgresql_query:
+  #     login_host: "{{ database_backup_login_host }}"
+  #     login_user: "{{ database_backup_login_user }}"
+  #     login_password: "{{ database_backup_login_password }}"
+  #     query: SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname=%s
+  #     positional_args:
+  #       - "{{ database_backup_name }}"
 
   - name: Backup from source database
-    postgresql_query:
+    community.postgresql.postgresql_copy:
       login_host: "{{ database_backup_login_host }}"
       login_user: "{{ database_backup_login_user }}"
       login_password: "{{ database_backup_login_password }}"
       db: "{{ database_backup_name }}"
-      query: COPY ({{ database_backup_sql }}) TO %s delimiter '~' CSV HEADER
-      positional_args:
-        - /tmp/db-table-backup--backup-csv
-
-  - name: Fetch backed up data
-    ansible.builtin.fetch:
-      src: /tmp/db-table-backup--backup-csv
-      dest: files/backup-csv
-      force: yes
-      flat: yes
-
-  # - name: Remove backed up data
-  #   ansible.builtin.file:
-  #     path: /tmp/db-table-backup--backup-csv
-  #     state: absent
+      src: "{{ item.value.source_query }}"
+      copy_to: "/tmp/db-table-backup--{{ item.key }}"
+      program: no
+      options:
+        format: csv
+        delimiter: "~"
+        header: true
+    with_dict: "{{ database_migration_map }}"
