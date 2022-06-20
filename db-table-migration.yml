@@ -12,6 +12,12 @@
         name: db-table-backup
         tasks_from: fetch-backup-file
 
+- hosts: restore
+  tasks:
+    - include_role:
+        name: db-table-restore
+        tasks_from: copy-backup-file
+
 - hosts: exec_sql
   roles:
   - db-table-restore

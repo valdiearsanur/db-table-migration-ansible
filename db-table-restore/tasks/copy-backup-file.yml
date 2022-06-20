@@ -1,0 +1,9 @@
+---
+
+- block:
+
+  - name: Copy backed up data
+    ansible.builtin.copy:
+      src: /tmp/db-table-restore--{{ item.key }}
+      dest: /tmp/db-table-restore--{{ item.key }}
+    with_dict: "{{ database_migration_map }}"
